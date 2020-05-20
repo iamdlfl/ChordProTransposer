@@ -180,6 +180,30 @@ diminishedchordflats = [
     '[Ebdim]', '[Edim]', '[Fdim]',
     '[Gbdim]', '[Gdim]', '[Abdim]',
     ]
+sus4chordsharps = [
+    '[Asus4]', '[A#sus4]', '[Bsus4]',
+    '[Csus4]', '[C#sus4]', '[Dsus4]',
+    '[D#sus4]', '[Esus4]', '[Fsus4]',
+    '[F#sus4]', '[Gsus4]', '[G#sus4]',
+    ]
+sus4chordflats = [
+    '[Asus4]', '[Bbsus4]', '[Bsus4]',
+    '[Csus4]', '[Dbsus4]', '[Dsus4]',
+    '[Ebsus4]', '[Esus4]', '[Fsus4]',
+    '[Gbsus4]', '[Gsus4]', '[Absus4]',
+    ]
+add9chordsharps = [
+    '[Aadd9]', '[A#add9]', '[Badd9]',
+    '[Cadd9]', '[C#add9]', '[Dadd9]',
+    '[D#add9]', '[Eadd9]', '[Fadd9]',
+    '[F#add9]', '[Gadd9]', '[G#add9]',
+    ]
+add9chordflats = [
+    '[Aadd9]', '[Bbadd9]', '[Badd9]',
+    '[Cadd9]', '[Dbadd9]', '[Dadd9]',
+    '[Ebadd9]', '[Eadd9]', '[Fadd9]',
+    '[Gbadd9]', '[Gadd9]', '[Abadd9]',
+    ]
 fname = file_name()
 updown = determine_direction()
 halfsteps = determine_halfsteps()
@@ -207,6 +231,10 @@ if updown == 'up' or updown == 'Up':
     augmentedchordsharps.reverse()
     diminishedchordflats.reverse()
     diminishedchordsharps.reverse()
+    sus4chordflats.reverse()
+    sus4chordsharps.reverse()
+    add9chordflats.reverse()
+    add9chordsharps.reverse()
 else:
     pass
 
@@ -230,7 +258,7 @@ def transposition_function(chordlist):
     global newsong
     newsong = '' #To reset newsong when running this function multiple times.
     for line in song:
-        newword = '' 
+        newword = ''
         newlinelist = []
         linelist = line.split('[')
         for word in linelist:
@@ -270,6 +298,10 @@ if chordtype == 'flat':
     transposition_function(augmentedchordflats)
     song = newsong.split('\n')
     transposition_function(diminishedchordflats)
+    song = newsong.split('\n')
+    transposition_function(sus4chordflats)
+    song = newsong.split('\n')
+    transposition_function(add9chordflats)
 else:
     transposition_function(majchordsharps)
     song = newsong.split('\n')
@@ -282,6 +314,10 @@ else:
     transposition_function(augmentedchordsharps)
     song = newsong.split('\n')
     transposition_function(diminishedchordsharps)
+    song = newsong.split('\n')
+    transposition_function(sus4chordsharps)
+    song = newsong.split('\n')
+    transposition_function(add9chordsharps)
 
 writesongfile.write(newsong)
 writesongfile.close()
