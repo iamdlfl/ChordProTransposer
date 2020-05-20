@@ -19,11 +19,12 @@ Functions
     determine_halfsteps()
     open_file()
     key_test()
+    transposition_function()
 
 Variables
     newsong
-    majchordsharps
-    majchordflats
+    \S+chordsharps
+    \S+chordflats
     fname
     updown
     halfsteps
