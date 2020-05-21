@@ -11,6 +11,7 @@ file.
 
 import os.path
 from os import path
+import re
 
 """Definitions
 
@@ -136,6 +137,16 @@ def new_song_file():
                                 + '.txt', 'w+')
             return newsongfile
             break
+def key_test_final():
+    """
+    Currently in development.
+
+    This will identify the actual key of the song and return it.
+    This will prove useful in the future when transposing based on
+    key name and not on the number of halfsteps. This will make the program
+    more user friendly.
+    """
+
 
 
 newsong = ''
