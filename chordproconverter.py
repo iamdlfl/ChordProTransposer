@@ -9,6 +9,9 @@ to transpose the original file into a new key. It then writes this to a new
 file.
 """
 
+import os.path
+from os import path
+
 """Definitions
 
 This section defines various functions and variables.
@@ -107,6 +110,33 @@ def key_test():
         else:
             chordtypes = 'flat'
         return chordtypes
+def new_song_file():
+    """
+    This function will test whether or not the file name has already been
+    created with a transposed tag.
+
+    If it has been, it will create a file with incrementing numbers
+    for each transposition.
+
+    variables
+        counter
+        newwsongfile
+    """
+    counter = 1
+    while True:
+        if path.exists(fname.strip('.txt')
+                        + 'Transposed'
+                        + str(counter)
+                        + '.txt'):
+            counter +=1
+        else:
+            newsongfile = open(fname.strip('.txt')
+                                + 'Transposed'
+                                + str(counter)
+                                + '.txt', 'w+')
+            return newsongfile
+            break
+
 
 newsong = ''
 majchordsharps = [
@@ -213,7 +243,7 @@ songraw = songfile.read()
 song = songraw.split('\n')
 songfile.close()
 chordtype = key_test()
-writesongfile = open(fname.strip('.txt') + 'Transposed.txt', 'w+')
+writesongfile = new_song_file()
 
 """
 This will reverse the lists of chords if the direction of transposition
