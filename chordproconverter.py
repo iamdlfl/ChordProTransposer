@@ -9,6 +9,7 @@ to transpose the original file into a new key. It then writes this to a new
 file.
 """
 
+import os
 import os.path
 from os import path
 import re
@@ -299,7 +300,6 @@ song = songraw.split('\n')
 songfile.close()
 
 chordtype = key_test()
-writesongfile = new_song_file()
 key_test_final()
 
 """
@@ -407,5 +407,6 @@ else:
     song = newsong.split('\n')
     transposition_function(add9chordsharps)
 
+writesongfile = new_song_file()
 writesongfile.write(newsong)
 writesongfile.close()
