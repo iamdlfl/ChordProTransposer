@@ -23,6 +23,7 @@ Functions
     determine_halfsteps()
     open_file()
     key_test()
+    new_song_file()
     transposition_function()
 
 Variables
