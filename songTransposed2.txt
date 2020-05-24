@@ -3,16 +3,16 @@
 {title: Swing Low Sweet Chariot}
 
 {start_of_chorus}
-Swing [Gb]low, sweet [B]chari[Gb]ot,
-Comin' for to carry me [Db7]home.
-Swing [Gb7]low, sweet [B]chari[Gb]ot,
-Comin' for to [Db7]carry me [Gb]home.
+Swing [Db]low, sweet [Gb]chari[Db]ot,
+Comin' for to carry me [Ab7]home.
+Swing [Db7]low, sweet [Gb]chari[Db]ot,
+Comin' for to [Ab7]carry me [Db]home.
 {end_of_chorus}
 
-I [Gb]looked over Jordan, and [B]what did I [Gb]see,
-Comin' for to carry me [Db7]home.
-A [Gb]band of angels [B]comin' after [Gb]me,
-Comin' for to [Db7]carry me [Gb]home.
+I [Db]looked over Jordan, and [Gb]what did I [Db]see,
+Comin' for to carry me [Ab7]home.
+A [Db]band of angels [Gb]comin' after [Db]me,
+Comin' for to [Ab7]carry me [Db]home.
 
 {comment: Chorus}
 

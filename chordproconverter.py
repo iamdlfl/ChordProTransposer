@@ -47,7 +47,7 @@ def file_name():
         filename
     """
     filename = input('What is the file name for the song you want to convert?')
-    if len(filename) < 1: filename = 'songeasy.txt' #For ease in testing
+    if len(filename) < 1: filename = 'song.txt' #For ease in testing
     return filename
 def determine_direction():
     """
@@ -146,9 +146,50 @@ def key_test_final():
     This will prove useful in the future when transposing based on
     key name and not on the number of halfsteps. This will make the program
     more user friendly.
+
+    functions
+        search_function(regex)
+
+    variables
+        notelist
+        regexlist
+        item
+
     """
+    notelist = dict()
 
+    def search_function(regex):
+        """
+        Searches song for regular expressions.
 
+        Searches the song for regular expressions that capture any
+        kind of chord and puts these chords into a dictionary.
+
+        variables
+            line
+            song
+            regx
+            stripped
+            fullstrip
+        """
+        for line in song:
+            regx = re.search(regex, line)
+            if regx is None:
+                continue
+            else:
+                stripped = regx.group().strip('\[')
+                fullstrip = stripped.strip('\]')
+                notelist[fullstrip] = notelist.get(fullstrip, 0) + 1
+
+    regexlist = ['\[A\S*?\]', '\[A#\S*?\]', '\[Bb\S*?\]',
+                '\[B\S*?\]', '\[C\S*?\]', '\[C#\S*?\]',
+                '\[Db\S*?\]', '\[D\S*?\]', '\[D#\S*?\]',
+                '\[Eb\S*?\]', '\[E\S*?\]', '\[F\S*?\]',
+                '\[F#\S*?\]', '\[G\S*?\]', '\[G#\S*?\]',
+                '\[Ab\S*?\]']
+
+    for item in regexlist:
+        search_function(item)
 
 newsong = ''
 majchordsharps = [
@@ -247,15 +288,19 @@ add9chordflats = [
     '[Ebadd9]', '[Eadd9]', '[Fadd9]',
     '[Gbadd9]', '[Gadd9]', '[Abadd9]',
     ]
+
 fname = file_name()
 updown = determine_direction()
 halfsteps = determine_halfsteps()
+
 songfile = open(fname, 'r+')
 songraw = songfile.read()
 song = songraw.split('\n')
 songfile.close()
+
 chordtype = key_test()
 writesongfile = new_song_file()
+key_test_final()
 
 """
 This will reverse the lists of chords if the direction of transposition
