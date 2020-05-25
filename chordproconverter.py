@@ -148,8 +148,10 @@ def key_test_final():
     key name and not on the number of halfsteps. This will make the program
     more user friendly.
 
-    Eventually will be used to write key of the transposed song
-    into its file name.
+    Development plans:
+        1. Create copy of original song with original key in name.
+        2. Write new song file with new key in its name.
+        3. Differentiate between minor and major keys.
 
     functions
         search_function(regex)
@@ -235,6 +237,7 @@ def key_test_final():
         """
         times = 0
         for key, val in notelist.items():
+            key = re.sub('7|sus4|sus|add9|/[A-Z][#b]', '', key)
             for chord in chords:
                 if chord == key:
                     times += 1
@@ -465,6 +468,7 @@ def transposition_function(chordlist):
             count = 0
             replaced = None
             word = '[' + word
+            word = re.sub('/[A-Z][#b]|/[A-Z]', '', word)
             for item in chordlist:
                 if item in word and replaced is None:
                     newword = word.replace(item, chordlist[count - halfsteps])
