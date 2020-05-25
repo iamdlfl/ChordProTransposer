@@ -148,6 +148,9 @@ def key_test_final():
     key name and not on the number of halfsteps. This will make the program
     more user friendly.
 
+    Eventually will be used to write key of the transposed song
+    into its file name.
+
     functions
         search_function(regex)
         chord_counter(chords)
