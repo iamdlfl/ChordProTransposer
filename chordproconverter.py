@@ -182,15 +182,37 @@ def key_test_final():
                 fullstrip = stripped.strip('\]')
                 notelist[fullstrip] = notelist.get(fullstrip, 0) + 1
 
-    regexlist = ['\[A\S*?\]', '\[A#\S*?\]', '\[Bb\S*?\]',
-                '\[B\S*?\]', '\[C\S*?\]', '\[C#\S*?\]',
-                '\[Db\S*?\]', '\[D\S*?\]', '\[D#\S*?\]',
-                '\[Eb\S*?\]', '\[E\S*?\]', '\[F\S*?\]',
-                '\[F#\S*?\]', '\[G\S*?\]', '\[G#\S*?\]',
-                '\[Ab\S*?\]']
+    regexlist = [
+        '\[A\S*?\]', '\[A#\S*?\]', '\[Bb\S*?\]', '\[B\S*?\]',
+        '\[C\S*?\]', '\[C#\S*?\]', '\[Db\S*?\]', '\[D\S*?\]',
+        '\[D#\S*?\]', '\[Eb\S*?\]', '\[E\S*?\]', '\[F\S*?\]',
+        '\[F#\S*?\]', '\[G\S*?\]', '\[G#\S*?\]', '\[Ab\S*?\]']
 
     for item in regexlist:
         search_function(item)
+
+    for key, val in notelist:
+        print(key)
+        
+    chromaticnotes = [
+        'A', 'A#', 'Bb', 'B',
+        'C', 'C#', 'Db', 'D',
+        'D#', 'Eb', 'E', 'F',
+        'F#', 'G', 'G#', 'Ab',
+        ]
+
+    Amajor = ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#']
+    Bbmajor = ['Bb', 'C', 'D', 'Eb', 'F', 'G', 'A']
+    Cmajor = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
+    Dbmajor = ['Db', 'Eb', 'F', 'Gb', 'Ab', 'Bb', 'C']
+    Dmajor = ['D', 'E', 'F#', 'G', 'A', 'B', 'C#']
+    Ebmajor = ['Eb', 'F', 'G', 'Ab', 'Bb', 'C', 'D']
+    Emajor = ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#']
+    Fmajor = ['F', 'G', 'A', 'Bb', 'C', 'D', 'E']
+    Fsharpmajor = ['F#', 'G#', 'A#', 'B', 'C#', 'D#', 'E#']
+    Gbmajor = ['Gb', 'Ab', 'Bb', 'Cb', 'Db', 'Eb', 'F']
+    Gmajor = ['G', 'A', 'B', 'C', 'D', 'E', 'F#']
+    Abmajor = ['Ab', 'Bb', 'C', 'Db', 'Eb', 'F', 'G']
 
 newsong = ''
 majchordsharps = [
