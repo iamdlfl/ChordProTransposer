@@ -150,15 +150,19 @@ def key_test_final():
 
     functions
         search_function(regex)
+        chord_counter(chords)
+        key()
 
     variables
         notelist
         regexlist
         item
+        chromaticnotes
+        \S+major
+        allkeyslist
 
     """
-    notelist = dict()
-
+    notelist = dict() #Dictionary of what chords/notes are in the song
     def search_function(regex):
         """
         Searches song for regular expressions.
@@ -181,38 +185,107 @@ def key_test_final():
                 stripped = regx.group().strip('\[')
                 fullstrip = stripped.strip('\]')
                 notelist[fullstrip] = notelist.get(fullstrip, 0) + 1
-
     regexlist = [
         '\[A\S*?\]', '\[A#\S*?\]', '\[Bb\S*?\]', '\[B\S*?\]',
         '\[C\S*?\]', '\[C#\S*?\]', '\[Db\S*?\]', '\[D\S*?\]',
         '\[D#\S*?\]', '\[Eb\S*?\]', '\[E\S*?\]', '\[F\S*?\]',
         '\[F#\S*?\]', '\[G\S*?\]', '\[G#\S*?\]', '\[Ab\S*?\]']
-
     for item in regexlist:
         search_function(item)
 
-    for key, val in notelist:
-        print(key)
-        
+
     chromaticnotes = [
         'A', 'A#', 'Bb', 'B',
         'C', 'C#', 'Db', 'D',
         'D#', 'Eb', 'E', 'F',
         'F#', 'G', 'G#', 'Ab',
         ]
+    Amajor = ['A', 'Bm', 'C#m', 'D', 'E', 'F#m', 'G#dim']
+    Bbmajor = ['Bb', 'Cm', 'Dm', 'Eb', 'F', 'Gm', 'Adim']
+    Bmajor = ['B', 'C#m', 'D#m', 'E', 'F#', 'G#m', 'A#dim']
+    Cmajor = ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim']
+    Dbmajor = ['Db', 'Ebm', 'Fm', 'Gb', 'Ab', 'Bbm', 'Cdim']
+    Dmajor = ['D', 'Em', 'F#m', 'G', 'A', 'Bm', 'C#dim']
+    Ebmajor = ['Eb', 'Fm', 'Gm', 'Ab', 'Bb', 'Cm', 'Ddim']
+    Emajor = ['E', 'F#m', 'G#m', 'A', 'B', 'C#m', 'D#dim']
+    Fmajor = ['F', 'Gm', 'Am', 'Bb', 'C', 'Dm', 'Edim']
+    Fsharpmajor = ['F#', 'G#m', 'A#m', 'B', 'C#', 'D#m', 'E#dim']
+    Gbmajor = ['Gb', 'Abm', 'Bbm', 'Cb', 'Db', 'Ebm', 'Fdim']
+    Gmajor = ['G', 'Am', 'Bm', 'C', 'D', 'Em', 'F#dim']
+    Abmajor = ['Ab', 'Bbm', 'Cm', 'Db', 'Eb', 'Fm', 'Gdim']
 
-    Amajor = ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#']
-    Bbmajor = ['Bb', 'C', 'D', 'Eb', 'F', 'G', 'A']
-    Cmajor = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
-    Dbmajor = ['Db', 'Eb', 'F', 'Gb', 'Ab', 'Bb', 'C']
-    Dmajor = ['D', 'E', 'F#', 'G', 'A', 'B', 'C#']
-    Ebmajor = ['Eb', 'F', 'G', 'Ab', 'Bb', 'C', 'D']
-    Emajor = ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#']
-    Fmajor = ['F', 'G', 'A', 'Bb', 'C', 'D', 'E']
-    Fsharpmajor = ['F#', 'G#', 'A#', 'B', 'C#', 'D#', 'E#']
-    Gbmajor = ['Gb', 'Ab', 'Bb', 'Cb', 'Db', 'Eb', 'F']
-    Gmajor = ['G', 'A', 'B', 'C', 'D', 'E', 'F#']
-    Abmajor = ['Ab', 'Bb', 'C', 'Db', 'Eb', 'F', 'G']
+    allkeyslist = [
+        Amajor, Bbmajor, Bmajor,
+        Cmajor, Dbmajor, Dmajor,
+        Ebmajor, Emajor, Fmajor,
+        Fsharpmajor, Gbmajor, Gmajor,
+        Abmajor]
+    allkeysnames = [
+        'Amajor', 'Bbmajor', 'Bmajor',
+        'Cmajor', 'Dbmajor', 'Dmajor',
+        'Ebmajor', 'Emajor', 'Fmajor',
+        'Fsharpmajor', 'Gbmajor', 'Gmajor',
+        'Abmajor']
+    def chord_counter(chords):
+        """
+        Counts number of chords in a song that are in each 'chords' or key.
+        """
+        times = 0
+        for key, val in notelist.items():
+            for chord in chords:
+                if chord == key:
+                    times += 1
+                else:
+                    pass
+        return times
+
+    def key():
+        """
+        Finds the largest number of matching chords to a key and
+        returns the one (or two) with the highest count.
+
+        variables
+            counts
+            track
+            list
+            name
+            number
+            thekey
+            thecount
+            secondkey
+            key
+            val
+        """
+        counts = 0
+        track = dict()
+        for list in allkeyslist:
+            name = allkeysnames[counts]
+            number = chord_counter(list)
+            track[name] = number
+            counts += 1
+        print(track)
+        thekey = None
+        thecount = None
+        secondkey = None
+        for key, val in track.items():
+            if thecount is None or val > thecount:
+                thekey = key
+                thecount = val
+        for key, val in track.items():
+            if val == thecount:
+                secondkey = key
+        if secondkey == thekey:
+            secondkey = None
+        if secondkey is None:
+            print("The original song is in the key of " + thekey)
+        else:
+            print("The original song is in the key of "
+                + thekey
+                + " or "
+                + secondkey)
+
+    key()
+
 
 newsong = ''
 majchordsharps = [
@@ -299,6 +372,18 @@ sus4chordflats = [
     '[Ebsus4]', '[Esus4]', '[Fsus4]',
     '[Gbsus4]', '[Gsus4]', '[Absus4]',
     ]
+suschordsharps = [
+    '[Asus]', '[A#sus]', '[Bsus]',
+    '[Csus]', '[C#sus]', '[Dsus]',
+    '[D#sus]', '[Esus]', '[Fsus]',
+    '[F#sus]', '[Gsus]', '[G#sus]',
+    ]
+suschordflats = [
+    '[Asus]', '[Bbsus]', '[Bsus]',
+    '[Csus]', '[Dbsus]', '[Dsus]',
+    '[Ebsus]', '[Esus]', '[Fsus]',
+    '[Gbsus]', '[Gsus]', '[Absus]',
+    ]
 add9chordsharps = [
     '[Aadd9]', '[A#add9]', '[Badd9]',
     '[Cadd9]', '[C#add9]', '[Dadd9]',
@@ -343,6 +428,8 @@ if updown == 'up' or updown == 'Up':
     diminishedchordsharps.reverse()
     sus4chordflats.reverse()
     sus4chordsharps.reverse()
+    suschordflats.reverse()
+    suschordsharps.reverse()
     add9chordflats.reverse()
     add9chordsharps.reverse()
 else:
@@ -411,6 +498,8 @@ if chordtype == 'flat':
     song = newsong.split('\n')
     transposition_function(sus4chordflats)
     song = newsong.split('\n')
+    transposition_function(suschordflats)
+    song = newsong.split('\n')
     transposition_function(add9chordflats)
 else:
     transposition_function(majchordsharps)
@@ -427,8 +516,10 @@ else:
     song = newsong.split('\n')
     transposition_function(sus4chordsharps)
     song = newsong.split('\n')
+    transposition_function(suschordsharps)
+    song = newsong.split('\n')
     transposition_function(add9chordsharps)
 
 writesongfile = new_song_file()
-writesongfile.write(newsong)
+writesongfile.write(newsong.strip())
 writesongfile.close()
