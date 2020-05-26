@@ -165,6 +165,7 @@ def key_test_final():
         chromaticnotes
         \S+major
         allkeyslist
+        minorkey
 
     """
     notelist = dict() #Dictionary of what chords/notes are in the song
@@ -198,7 +199,6 @@ def key_test_final():
     for item in regexlist:
         search_function(item)
 
-
     chromaticnotes = [
         'A', 'A#', 'Bb', 'B',
         'C', 'C#', 'Db', 'D',
@@ -218,7 +218,6 @@ def key_test_final():
     Gbmajor = ['Gb', 'Abm', 'Bbm', 'Cb', 'Db', 'Ebm', 'Fdim']
     Gmajor = ['G', 'Am', 'Bm', 'C', 'D', 'Em', 'F#dim']
     Abmajor = ['Ab', 'Bbm', 'Cm', 'Db', 'Eb', 'Fm', 'Gdim']
-
     allkeyslist = [
         Amajor, Bbmajor, Bmajor,
         Cmajor, Dbmajor, Dmajor,
@@ -237,14 +236,37 @@ def key_test_final():
         """
         times = 0
         for key, val in notelist.items():
-            key = re.sub('7|sus4|sus|add9|/[A-Z][#b]', '', key)
+            key = re.sub('7|sus4|sus|add9|/[A-Z][#b]|/[A-Z]', '', key)
             for chord in chords:
                 if chord == key:
                     times += 1
                 else:
                     pass
         return times
+    def minor_test():
+        """
+        Tests if minor chords occur more.
 
+        This is a rough solution for whether or not the song should be in
+        the major key or the relative minor.
+
+        variables
+            bigkey
+            bigval
+            key
+            val
+            x
+        """
+        bigkey = None
+        bigval = None
+        for key, val in notelist.items():
+            if bigval is None or val > bigval:
+                bigval = val
+                bigkey = key
+        x = re.search('\S+m', bigkey)
+        if x:
+            mkey = True
+            return mkey
     def key():
         """
         Finds the largest number of matching chords to a key and
@@ -269,7 +291,6 @@ def key_test_final():
             number = chord_counter(list)
             track[name] = number
             counts += 1
-        print(track)
         thekey = None
         thecount = None
         secondkey = None
@@ -289,9 +310,11 @@ def key_test_final():
                 + thekey
                 + " or "
                 + secondkey)
+        if minorkey is True:
+            print("You may be in the relative minor of this major key.")
 
+    minorkey = minor_test()
     key()
-
 
 newsong = ''
 majchordsharps = [
@@ -468,7 +491,7 @@ def transposition_function(chordlist):
             count = 0
             replaced = None
             word = '[' + word
-            word = re.sub('/[A-Z][#b]|/[A-Z]', '', word)
+            word = re.sub('/[A-Z][#b]|/[A-Z]', '', word) #Temp sol: X/Y chords
             for item in chordlist:
                 if item in word and replaced is None:
                     newword = word.replace(item, chordlist[count - halfsteps])
