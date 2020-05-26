@@ -22,10 +22,10 @@ Functions
     file_name()
     determine_direction()
     determine_halfsteps()
-    open_file()
     key_test()
     new_song_file()
     transposition_function()
+    key_test_final()
 
 Variables
     newsong
@@ -157,6 +157,7 @@ def key_test_final():
         search_function(regex)
         chord_counter(chords)
         key()
+        minor_test()
 
     variables
         notelist
@@ -550,6 +551,7 @@ else:
     song = newsong.split('\n')
     transposition_function(add9chordsharps)
 
+"""This section writes the new, transposed song file."""
 writesongfile = new_song_file()
 writesongfile.write(newsong.strip())
 writesongfile.close()
