@@ -1,0 +1,17 @@
+# A simple ChordPro song.
+
+{title: Swing Low Sweet Chariot}
+
+{start_of_chorus}
+Swing [B]low, sweet [E]chari[B]ot,
+Comin' for to carry me [Gb7]home.
+Swing [B7]low, sweet [E]chari[B]ot,
+Comin' for to [Gb7]carry me [B]home.
+{end_of_chorus}
+
+I [B]looked over Jordan, and [E]what did I [B]see,
+Comin' for to carry me [Gb7]home.
+A [B]band of angels [E]comin' after [B]me,
+Comin' for to [Gb7]carry me [B]home.
+
+{comment: Chorus}

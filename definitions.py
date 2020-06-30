@@ -254,6 +254,7 @@ def key_test_final():
             if bigval is None or val > bigval:
                 bigval = val
                 bigkey = key
+        print(bigkey)
         x = re.search('\S+m', bigkey)
         if x:
             mkey = True
@@ -303,7 +304,7 @@ def key_test_final():
                 + secondkey)
         if minorkey is True:
             print("You may be in the relative minor of this major key.")
-
+    print(notelist.items())
     minorkey = minor_test()
     key()
 def transposition_function(chordlist):
