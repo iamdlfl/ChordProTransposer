@@ -1,3 +1,4 @@
+#SELF MADE
 """
 Transposes a ChordPro file from one key to another.
 
