@@ -2,6 +2,7 @@ import os
 import os.path
 from os import path
 import re
+
 """Definitions
 
 This section defines various functions and variables.
@@ -30,6 +31,8 @@ Variables
 """
 songraw = ''
 song = ''
+
+
 def file_name():
     """
     Defines the file name to be transposed
@@ -38,8 +41,10 @@ def file_name():
         filename
     """
     filename = input('What is the file name for the song you want to convert?')
-    if len(filename) < 1: filename = 'song.txt' #For ease in testing
+    if len(filename) < 1: filename = 'song.txt'  # For ease in testing
     return filename
+
+
 def determine_direction():
     """
     Determines direction to transpose
@@ -49,19 +54,21 @@ def determine_direction():
     """
     while True:
         upordown = input('Would you like to transpose up or down? '
-                       'Please input either "up" or "down".')
+                         'Please input either "up" or "down".')
         if len(upordown) < 1:
-                upordown = 'down' #For ease in testing
-                return upordown
-                break
+            upordown = 'down'  # For ease in testing
+            return upordown
+            break
         elif (upordown != 'up'
-                and upordown != 'down'
-                and upordown != 'Up'
-                and upordown != 'Down'):
+              and upordown != 'down'
+              and upordown != 'Up'
+              and upordown != 'Down'):
             pass
         else:
             return upordown
             break
+
+
 def determine_halfsteps():
     """
     Determines number of halfsteps to transpose
@@ -73,7 +80,7 @@ def determine_halfsteps():
     halfsteptest = None
     while halfsteptest != 0:
         halfstep = input('How many halfsteps would you like to transpose? '
-                          'Please input a number.')
+                         'Please input a number.')
         try:
             int(halfstep)
         except:
@@ -84,6 +91,8 @@ def determine_halfsteps():
             halfsteptest = 0
         else:
             print('Please input a number less than 12.')
+
+
 def key_test():
     """
     Currently tests whether original file uses sharps.
@@ -103,7 +112,9 @@ def key_test():
         else:
             chordtypes = 'flat'
         return chordtypes
-def new_song_file():
+
+
+def new_song_file(nam):
     """
     This function will test whether or not the file name has already been
     created with a transposed tag.
@@ -117,19 +128,21 @@ def new_song_file():
     """
     counter = 1
     while True:
-        if path.exists(fname.strip('.txt')
-                        + 'Transposed'
-                        + str(counter)
-                        + '.txt'):
-            counter +=1
+        if path.exists(nam.strip('.txt')
+                       + 'Transposed'
+                       + str(counter)
+                       + '.txt'):
+            counter += 1
         else:
-            newsongfile = open(fname.strip('.txt')
-                                + 'Transposed'
-                                + str(counter)
-                                + '.txt', 'w+')
+            newsongfile = open(nam.strip('.txt')
+                               + 'Transposed'
+                               + str(counter)
+                               + '.txt', 'w+')
             return newsongfile
             break
-def key_test_final():
+
+
+def key_test_final(songs):
     """
     Currently in development.
 
@@ -159,8 +172,9 @@ def key_test_final():
         minorkey
 
     """
-    notelist = dict() #Dictionary of what chords/notes are in the song
-    def search_function(regex):
+    notelist = dict()  # Dictionary of what chords/notes are in the song
+
+    def search_function(regex, song):
         """
         Searches song for regular expressions.
 
@@ -182,20 +196,21 @@ def key_test_final():
                 stripped = regx.group().strip('\[')
                 fullstrip = stripped.strip('\]')
                 notelist[fullstrip] = notelist.get(fullstrip, 0) + 1
+
     regexlist = [
         '\[A\S*?\]', '\[A#\S*?\]', '\[Bb\S*?\]', '\[B\S*?\]',
         '\[C\S*?\]', '\[C#\S*?\]', '\[Db\S*?\]', '\[D\S*?\]',
         '\[D#\S*?\]', '\[Eb\S*?\]', '\[E\S*?\]', '\[F\S*?\]',
         '\[F#\S*?\]', '\[G\S*?\]', '\[G#\S*?\]', '\[Ab\S*?\]']
     for item in regexlist:
-        search_function(item)
+        search_function(item, songs)
 
     chromaticnotes = [
         'A', 'A#', 'Bb', 'B',
         'C', 'C#', 'Db', 'D',
         'D#', 'Eb', 'E', 'F',
         'F#', 'G', 'G#', 'Ab',
-        ]
+    ]
     Amajor = ['A', 'Bm', 'C#m', 'D', 'E', 'F#m', 'G#dim']
     Bbmajor = ['Bb', 'Cm', 'Dm', 'Eb', 'F', 'Gm', 'Adim']
     Bmajor = ['B', 'C#m', 'D#m', 'E', 'F#', 'G#m', 'A#dim']
@@ -221,6 +236,7 @@ def key_test_final():
         'Ebmajor', 'Emajor', 'Fmajor',
         'Fsharpmajor', 'Gbmajor', 'Gmajor',
         'Abmajor']
+
     def chord_counter(chords):
         """
         Counts number of chords in a song that are in each 'chords' or key.
@@ -234,6 +250,7 @@ def key_test_final():
                 else:
                     pass
         return times
+
     def minor_test():
         """
         Tests if minor chords occur more.
@@ -255,10 +272,11 @@ def key_test_final():
                 bigval = val
                 bigkey = key
         print(bigkey)
-        x = re.search('\S+m', bigkey)
+        x = re.search(r'\S+m', bigkey)
         if x:
             mkey = True
             return mkey
+
     def key():
         """
         Finds the largest number of matching chords to a key and
@@ -299,14 +317,17 @@ def key_test_final():
             print("The original song is in the key of " + thekey)
         else:
             print("The original song is in the key of "
-                + thekey
-                + " or "
-                + secondkey)
+                  + thekey
+                  + " or "
+                  + secondkey)
         if minorkey is True:
             print("You may be in the relative minor of this major key.")
+
     print(notelist.items())
     minorkey = minor_test()
     key()
+
+
 def transposition_function(chordlist):
     """
     Transposes the song and writes it to string 'newsong'
@@ -325,7 +346,7 @@ def transposition_function(chordlist):
     """
     global song
     global newsong
-    newsong = '' #To reset newsong when running this function multiple times.
+    newsong = ''  # To reset newsong when running this function multiple times.
     for line in song:
         newword = ''
         newlinelist = []
@@ -334,7 +355,7 @@ def transposition_function(chordlist):
             count = 0
             replaced = None
             word = '[' + word
-            word = re.sub('/[A-Z][#b]|/[A-Z]', '', word) #Temp sol: X/Y chords
+            word = re.sub('/[A-Z][#b]|/[A-Z]', '', word)  # Temp sol: X/Y chords
             for item in chordlist:
                 if item in word and replaced is None:
                     newword = word.replace(item, chordlist[count - halfsteps])
